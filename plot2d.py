@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 
+#execute function
+def plotEC2d(code='Auger.csv'):
+    ra1,dec1 = read(code)
+    plot(ra1,dec1)
+
+#code reading
 def read(code):
     #right ascension
     df   = pd.read_csv(code)
@@ -17,10 +23,11 @@ def read(code):
 
     return ra1,dec1
 
-def plot2d(ra,dec):
+#plot2d
+def plot(ra,dec):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    H = ax.hist2d(ra1, dec1, bins=15, cmap=cm.jet)
+    H = ax.hist2d(ra, dec, bins=15, cmap=cm.jet)
     ax.set_title('RA-DEC(2D)')
     ax.set_xlabel('Right Ascension')
     ax.set_ylabel('Declination')
@@ -28,6 +35,4 @@ def plot2d(ra,dec):
     plt.savefig("plot2d.jpg")
     plt.show()
 
-
-ra1,dec1 = read('Auger.csv')
-plot2d(ra1,dec1)
+plotEC2d()

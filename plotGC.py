@@ -4,18 +4,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+#execcute function
+def GC(code='Auger.csv'):
+    ra1,dec1 = read(code)
+    Galactic(ra1, dec1)
 
 def read(code):
-    #right ascension
     df   = pd.read_csv(code)
-    ra1  = df['Ch1'].values
-
-    #declination
+    ra1  = df['Ch1'].values #right ascension
     df   = pd.read_csv(code)
-    dec1 = df['Ch2'].values
-
-    return ra1,dec1
-
+    dec1 = df['Ch2'].values #declination
+    return ra1, dec1
 
 def Galactic(ra,dec):
     c = SkyCoord(ra=ra, dec=dec, unit='deg')
@@ -38,8 +37,7 @@ def Galactic(ra,dec):
     ax.set_xlabel("galactic longitude")
     ax.set_ylabel("galactic latitude")
     ax.grid(True)
-    plt.savefig("galactic.jpg")
+    plt.savefig("plotGC.jpg")
     plt.show()
 
-ra1,dec1 = read('Auger.csv')
-Galactic(ra1, dec1)
+GC()

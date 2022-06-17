@@ -4,11 +4,18 @@ import pandas as pd
 from astropy.modeling import models
 
 
+#execute function
+def energyhist(code='Auger.csv',bins=50):
+    energy = read(code)
+    plot(energy,bins)
+
+#code reading
 def read(code):
     df  = pd.read_csv(code)
     energy = df['Ch3'].values
     return energy
 
+#plot
 def plot(energy, bins=50):
     fig = plt.figure() #make figure object
     ax  = fig.add_subplot(111) #make axes object
@@ -21,6 +28,4 @@ def plot(energy, bins=50):
     plt.savefig("energy.jpg")
     plt.show()
 
-
-energy = read('Auger.csv')
-plot(energy,50)
+energyhist()

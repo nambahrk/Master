@@ -6,6 +6,12 @@ import math
 import matplotlib.pyplot as plt
 
 
+#execute function
+def angularhist(code='Auger.csv', bins=180):
+    rightascention, declination = read(code)
+    plot(accumulation(rightascention, declination),bins)
+
+#code reading
 def read(code):
     #right ascension
     df = pd.read_csv(code)
@@ -17,6 +23,7 @@ def read(code):
 
     return rightascention, declination
 
+#accumulation analysis
 def accumulation(ra,dec):
     #centaurus A direction vector
     a1 = math.cos(math.radians(-43))*math.sin(math.radians(201))
@@ -37,6 +44,7 @@ def accumulation(ra,dec):
 
     return angular
 
+#plot
 def plot(angular, bins=180):
     fig = plt.figure() #make figure object
     ax = fig.add_subplot(111) #make axes object
@@ -47,7 +55,4 @@ def plot(angular, bins=180):
     plt.savefig("Angular.jpg")
     plt.show()
 
-
-rightascention, declination = read('Auger.csv')
-angular = accumulation(rightascention, declination)
-plot(angular,180)
+angularhist()    
