@@ -21,17 +21,15 @@ def Galactic(ra,dec):
     c = c.galactic
     RA = np.array(c.l)
     DEC = np.array(c.b)
+    ind      = RA>180
+    RA[ind] -= 360
+    RA=-RA
 
-    x = np.remainder(RA+360,360) # shift RA values
-    ind     = x>180
-    x[ind] -= 360
-    RA      = -x
-
-    tick_labels = np.array([150, 120, 90, 60, 30, 0, -30, -60, -90, -120, -150])
     fig = plt.figure() #make figure object
     ax = fig.add_subplot(111, projection='aitoff') #make axes object
-    ax.scatter(np.radians(55),np.radians(19.4), s=100, alpha=0.3 , color="red")
-    ax.scatter(np.radians(RA),np.radians(DEC), s=2.5)  # convert degrees to radians
+    ax.scatter(np.radians(RA),np.radians(DEC), s=2.5)
+    ax.scatter(np.radians(-55),np.radians(19.4), s=100, alpha=0.3 , color="red")
+    tick_labels = np.array([150, 120, 90, 60, 30, 0, -30, -60, -90, -120, -150])
     ax.set_xticklabels(tick_labels)     # we add the scale on the x axis
     ax.set_title("Direction of Arrival (GC)\n @Auger")
     ax.set_xlabel("galactic longitude")
