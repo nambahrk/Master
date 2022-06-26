@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 #execute function
-def overingEC(code='hotspot.csv',angle=45):
+def overingEC(code='hotspot.csv',angle=20):
     ra,dec = read(code)
     ra,dec = oversample(ra, dec, angle)
     plot(ra, dec, angle)
@@ -28,11 +28,9 @@ def oversample(ra,dec,angle):
         a1 = math.cos(ido)*math.sin(keido)
         a2 = math.cos(ido)*math.cos(keido)
         a3 = math.sin(ido)
-        keidos=int(math.degrees(keido))
-        idos = int(math.degrees(ido))
 
-        for k in range(keidos-angle, keidos+angle):
-            for j in range(idos-angle, idos+angle):
+        for k in range(0,360):
+            for j in range(-90, 90):
                 b1 = math.cos(math.radians(j))*math.sin(math.radians(k))
                 b2 = math.cos(math.radians(j))*math.cos(math.radians(k))
                 b3 = math.sin(math.radians(j))
